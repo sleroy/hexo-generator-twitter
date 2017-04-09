@@ -1,0 +1,42 @@
+{
+    "name": "hexo-generator-twitter",
+    "version": "1.1.2",
+    "description": "Twitter notification plugin for Hexo",
+    "main": "index",
+    "scripts": {
+        "eslint": "eslint .",
+        "jscs": "jscs .",
+        "test": "mocha test/*-test.js",
+        "test-cov": "istanbul cover --print both _mocha -- test/*.js"
+    },
+    "directories": {
+        "lib": "./lib"
+    },
+    "repository": "hexojs/hexo-generator-twitter",
+    "keywords": [
+        "hexo",
+        "twitter",
+        "notification",
+        "plugin",
+        "generator"
+    ],
+    "author": "Sylvain Leroy <contact@sylvainleroy.com> (http://sylvainleroy.com)",
+    "license": "MIT",
+    "dependencies": {
+        "minimatch": "^3.0.0",
+        "node-twitter-api": "^1.8.0",
+        "nunjucks": "^3.0.0",
+        "object-assign": "^4.0.1"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "cheerio": "^0.22.0",
+        "eslint": "^3.19.0",
+        "eslint-config-hexo": "^1.0.2",
+        "hexo": "^3.0.0",
+        "istanbul": "^0.4.2",
+        "jscs": "^3.0.7",
+        "jscs-preset-hexo": "^1.0.1",
+        "mocha": "^3.2.0"
+    }
+}
