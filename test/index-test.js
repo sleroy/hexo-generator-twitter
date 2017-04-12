@@ -1,10 +1,10 @@
 'use strict';
 
-var should = require('chai').should(); // eslint-disable-line
-var Hexo = require('hexo');
+let should = require('chai').should(); // eslint-disable-line
+let Hexo = require('hexo');
 
 describe('Twitter Plugin Index', function() {
-    var hexo = new Hexo(__dirname, { silent: true });
-    var generator = require('../lib/twitter-reactor').bind(hexo);
+    let hexo = new Hexo(__dirname, { silent: true });
+    let generator = require('../lib/twitter-reactor');
 
 });
