@@ -7,9 +7,10 @@ let cheerio = require('cheerio');
 describe('Twitter Notification', function() {
     let hexo = new Hexo(__dirname, { silent: true });
     hexo.config.twitter = {
-        consumerKey: 'your consumer Key',
-        consumerSecret: 'your consumer secret',
-        callback: 'http://yoururl.tld/something',
+        consumerKey: 'GSh7JHZq2AHcfLmR7R7VQ842T',
+        consumerSecret: 'eOzvHkM1SgE4d68RRv2bRRyq0QUaaAtPBjx7esdNFfLZ8wJmz',
+        accessToken: '3060152019-Nmt3Z9v9uR8QeI3rfdsK5Ko9WjkFJQ0g3UD4Gix',
+        accessTokenSecret: ' p2H9MoCl5pf0UIdYLZd7hdQ5DYVAiKaLssME1vY6TzO5g',
     }
     let Post = hexo.model('Post');
     let notificator = require('../lib/twitter-notif');

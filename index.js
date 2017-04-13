@@ -9,9 +9,10 @@ const twitterReactor = require('./lib/twitter-reactor');
 
 
 let config = hexo.config.twitter = assign({
-        consumerKey: 'your consumer Key',
-        consumerSecret: 'your consumer secret',
-        callback: 'http://yoururl.tld/something',
+        consumer_key: '...',
+        consumer_secret: '...',
+        access_token: '...',
+        access_token_secret: '...',
         x_auth_access_type: "write",
         proxy: {
             enabled: false,
