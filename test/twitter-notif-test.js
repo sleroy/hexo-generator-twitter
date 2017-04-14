@@ -7,10 +7,10 @@ let cheerio = require('cheerio');
 describe('Twitter Notification', function() {
     let hexo = new Hexo(__dirname, { silent: true });
     hexo.config.twitter = {
-        consumerKey: 'GSh7JHZq2AHcfLmR7R7VQ842T',
-        consumerSecret: 'eOzvHkM1SgE4d68RRv2bRRyq0QUaaAtPBjx7esdNFfLZ8wJmz',
-        accessToken: '3060152019-Nmt3Z9v9uR8QeI3rfdsK5Ko9WjkFJQ0g3UD4Gix',
-        accessTokenSecret: ' p2H9MoCl5pf0UIdYLZd7hdQ5DYVAiKaLssME1vY6TzO5g',
+        consumer_key: 'GSh7JHZq2AHcfLmR7R7VQ842T',
+        consumer_secret: 'eOzvHkM1SgE4d68RRv2bRRyq0QUaaAtPBjx7esdNFfLZ8wJmz',
+        access_token: '3060152019-Nmt3Z9v9uR8QeI3rfdsK5Ko9WjkFJQ0g3UD4Gix',
+        access_token_secret: ' p2H9MoCl5pf0UIdYLZd7hdQ5DYVAiKaLssME1vY6TzO5g',
     }
     let Post = hexo.model('Post');
     let notificator = require('../lib/twitter-notif');
@@ -38,10 +38,14 @@ describe('Twitter Notification', function() {
     });
 
 
-    it('sendTweet', function() {
+    it('sendTweet', function(done) {
 
         let twitterNotif = notificator(hexo);
-        twitterNotif.sendTweet("Discover my blog : https://sylvainleroy.com #Coding #Refactoring #Digital")
+        let promise = twitterNotif.sendTweet("Discover my blog : https://sylvainleroy.com #Coding #Refactoring #Digital");
+        promise
+            .then()
+            .catch();
+
         twitterNotif.close();
     });
 

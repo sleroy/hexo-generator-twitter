@@ -13,7 +13,6 @@ let config = hexo.config.twitter = assign({
         consumer_secret: '...',
         access_token: '...',
         access_token_secret: '...',
-        x_auth_access_type: "write",
         proxy: {
             enabled: false,
             host: '10.0.0.10',

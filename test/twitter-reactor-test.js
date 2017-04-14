@@ -9,8 +9,10 @@ describe('Twitter Reactor', function() {
     it('checkConfig_ok', function() {
         let config = {
             twitter: {
-                consumerKey: 'your consumer Key',
-                consumerSecret: 'your consumer secret',
+                consumer_key: '...',
+                consumer_secret: '...',
+                access_token: '...',
+                access_token_secret: '...',
                 callback: 'http://yoururl.tld/something',
             }
         };
@@ -30,8 +32,9 @@ describe('Twitter Reactor', function() {
     it('checkConfig_invalid_plugin_config_consumerkey', function() {
         let config = {
             twitter: {
-                consumerSecret: 'your consumer secret',
-                callback: 'http://yoururl.tld/something',
+                consumer_secret: '...',
+                access_token: '...',
+                access_token_secret: '...',
             }
         };
         let result = generator.checkConfig(config);
@@ -41,8 +44,9 @@ describe('Twitter Reactor', function() {
     it('checkConfig_invalid_plugin_config_consumerSECRET', function() {
         let config = {
             twitter: {
-                consumerKey: 'your consumer Key',
-                callback: 'http://yoururl.tld/something',
+                consumer_key: '...',
+                access_token: '...',
+                access_token_secret: '...',
             }
         };
 
@@ -50,11 +54,26 @@ describe('Twitter Reactor', function() {
         result.should.not.be.ok;
     });
 
-    it('checkConfig_invalid_plugin_config_callback', function() {
+    it('checkConfig_invalid_plugin_config_access_token', function() {
         let config = {
             twitter: {
-                consumerSecret: 'your consumer secret',
-                consumerKey: 'your consumer Key',
+                consumer_key: '...',
+                consumer_secret: '...',
+                access_token: '...',
+            }
+        };
+
+        let result = generator.checkConfig(config);
+        result.should.not.be.ok;
+    });
+
+
+    it('checkConfig_invalid_plugin_config_access_token_secret', function() {
+        let config = {
+            twitter: {
+                consumer_key: '...',
+                consumer_secret: '...',
+                access_token: '...',
             }
         };
 
