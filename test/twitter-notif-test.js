@@ -1,53 +1,65 @@
 'use strict';
 
-let should = require('chai').should(); // eslint-disable-line
-let Hexo = require('hexo');
-let cheerio = require('cheerio');
+const should = require('chai').should(); // eslint-disable-line
+const assert = require('chai').assert; // eslint-disable-line
+const logger = require('hexo-log')();
+
+
 
 describe('Twitter Notification', function() {
-    let hexo = new Hexo(__dirname, { silent: true });
-    hexo.config.twitter = {
-        consumer_key: 'GSh7JHZq2AHcfLmR7R7VQ842T',
-        consumer_secret: 'eOzvHkM1SgE4d68RRv2bRRyq0QUaaAtPBjx7esdNFfLZ8wJmz',
-        access_token: '3060152019-Nmt3Z9v9uR8QeI3rfdsK5Ko9WjkFJQ0g3UD4Gix',
-        access_token_secret: ' p2H9MoCl5pf0UIdYLZd7hdQ5DYVAiKaLssME1vY6TzO5g',
-    }
-    let Post = hexo.model('Post');
-    let notificator = require('../lib/twitter-notif');
-    let posts;
-    let locals;
+    const twitter = require('../lib/twitter-notif');
 
-    before(function() {
-        return hexo.init().then(function() {
-            return Post.insert([
-                { source: 'foo', slug: 'foo', updated: 1e8 },
-                { source: 'bar', slug: 'bar', updated: 1e8 + 1 },
-                { source: 'baz', slug: 'baz', updated: 1e8 - 1 }
-            ]).then(function(data) {
-                posts = Post.sort('-updated');
-                locals = hexo.locals.toObject();
-            });
+    describe('Send tweet', function() {
+
+        it('sendTweet', function(done) {
+            const config = require("./twitter.config.default");
+            const T = twitter.new_client(config);
+
+            const promise = twitter.send_tweet(T, config, "Discover my blog : https://sylvainleroy.com #Coding #Refactoring #Digital");
+            promise
+                .then((data) => {
+                    logger.debug("Data -> " + data);
+                    done();
+                })
+                .catch((err) => {
+                    logger.debug("Error -> " + err);
+                    done();
+                });
         });
-    });
 
-    it('initAndCloseNotification', function() {
+        it('sendTweet_disabled', function(done) {
+            const config = require("./twitter.config.disabled");
+            const T = twitter.new_client(config);
 
-        let twitterNotif = notificator(hexo);
-        should.exist(twitterNotif);
-        twitterNotif.close();
-    });
+            const promise = twitter.send_tweet(T, config, "Discover my blog : https://sylvainleroy.com #Coding #Refactoring #Digital");
+            promise
+                .then((data) => {
+                    logger.debug(data);
+                    data.should.be.equals("disabled");
+                    done();
+                });
 
 
-    it('sendTweet', function(done) {
+        });
+    })
 
-        let twitterNotif = notificator(hexo);
-        let promise = twitterNotif.sendTweet("Discover my blog : https://sylvainleroy.com #Coding #Refactoring #Digital");
-        promise
-            .then()
-            .catch();
+    describe('New tweet', function() {
 
-        twitterNotif.close();
-    });
+        it('new_tweet', function() {
 
+            const tweetData = require('./tweet.example');
+            const config = require('./twitter.config.disabled');
+
+            const new_tweet = twitter.new_tweet(tweetData, config);
+            console.log(new_tweet);
+            assert.isOk(new_tweet.tweet);
+            assert.isOk(new_tweet.media);
+            assert.isOk(new_tweet.link);
+            assert.equal(new_tweet.tweet, "mytitle #C1 #C2 #C3");
+            assert.equal(new_tweet.media, "coverPicture.jpg");
+            assert.equal(new_tweet.link, "http://");
+        });
+
+    })
 
 });

@@ -26,6 +26,7 @@
     "global-tunnel": "^1.2.0",
     "lowdb": "^0.16.2",
     "minimatch": "^3.0.0",
+    "moment": "^2.18.1",
     "nunjucks": "^3.0.0",
     "object-assign": "^4.0.1",
     "twit": "^2.2.5"
