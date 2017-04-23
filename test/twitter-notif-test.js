@@ -15,7 +15,7 @@ describe('Twitter Notification', function() {
             const config = require("./twitter.config.default");
             const T = twitter.new_client(config);
 
-            const promise = twitter.send_tweet(T, config, "Discover my blog : https://sylvainleroy.com #Coding #Refactoring #Digital");
+            const promise = T.send_tweet("Discover my blog : https://sylvainleroy.com #Coding #Refactoring #Digital");
             promise
                 .then((data) => {
                     logger.debug("Data -> " + data);
@@ -31,7 +31,7 @@ describe('Twitter Notification', function() {
             const config = require("./twitter.config.disabled");
             const T = twitter.new_client(config);
 
-            const promise = twitter.send_tweet(T, config, "Discover my blog : https://sylvainleroy.com #Coding #Refactoring #Digital");
+            const promise = T.send_tweet(T, config, "Discover my blog : https://sylvainleroy.com #Coding #Refactoring #Digital");
             promise
                 .then((data) => {
                     logger.debug(data);
@@ -49,8 +49,8 @@ describe('Twitter Notification', function() {
 
             const tweetData = require('./tweet.example');
             const config = require('./twitter.config.disabled');
-
-            const new_tweet = twitter.new_tweet(tweetData, config);
+            const T = twitter.new_client(config);
+            const new_tweet = T.new_tweet(tweetData, config);
             console.log(new_tweet);
             assert.isOk(new_tweet.tweet);
             assert.isOk(new_tweet.media);

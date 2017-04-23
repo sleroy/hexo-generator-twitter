@@ -129,7 +129,7 @@ describe('Social Generator', function() {
 
                 logger.debug('[Hexo Twitter]: initialization server server_middleware');
                 // Twitter notification component initialization
-                should.exist(hexo.locals.get('twitter'));
+                should.exist(hexo.locals.get('social'));
                 generator.twitter_generate(hexo.locals.toObject());
 
                 done();
